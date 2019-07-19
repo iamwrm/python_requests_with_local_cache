@@ -11,7 +11,7 @@ class Problem3(unittest.TestCase):
 
 class Problem4(unittest.TestCase):
     def test_search_result_diction(self):
-        self.assertEqual(type(search_result_diction),type({}), "Testing that search_result_diction is a dictiionary")
+        self.assertEqual(type(search_result_diction),type({}), "Testing that search_result_diction is a dictionary")
     def test_search_result_diction2(self):
         self.assertTrue("photos" in search_result_diction, "Testing that the photos key is in the loaded flickr response, as it should be")
     def test_sample_photo_ids(self):
@@ -25,13 +25,15 @@ class Problem6(unittest.TestCase):
     def test_get_flickr_data1(self):
         self.assertEqual(sorted(list(get_flickr_data("alps").keys())),[u'photos',u'stat'], "Testing the keys of the return value of get_flickr_data") # Unicode OK -- need change?
     def test_get_flickr_data2(self):
-        self.assertEqual(sorted(list(get_flickr_data("alps")["photos"]["photo"][49].keys())),sorted([u'isfamily', u'title', u'farm', u'ispublic', u'server', u'isfriend', u'secret', u'owner', u'id']), "Testing the keys of one of the photos inside the get_flickr_data response")
+        self.assertEqual(sorted(list(get_flickr_data("alps")["photos"]["photo"][44].keys())),sorted([u'isfamily', u'title', u'farm', u'ispublic', u'server', u'isfriend', u'secret', u'owner', u'id']), "Testing the keys of one of the photos inside the get_flickr_data response")
     def test_get_flickr_data_resp_type(self):
-        self.assertEqual(type(get_flickr_data("alps")["photos"]["photo"][49]),type({}), "Testing that the value of one of the photos in the function's return value is a dictionary")
+        self.assertEqual(type(get_flickr_data("alps")["photos"]["photo"][45]),type({}), "Testing that the value of one of the photos in the function's return value is a dictionary")
     def test_get_all_diff_photos(self):
         self.assertTrue(get_flickr_data("sunset")["photos"]["photo"][30]["id"] != get_flickr_data("sunset")["photos"]["photo"][15]["id"], "Testing that the list of photos is not a composed list of all the same photo")
-    def test_default_num_photos(self):
-        self.assertEqual(len(get_flickr_data("sunset")["photos"]["photo"]),50,"Testing that the default num_photos response has 50 photos")
+##  Title changed (added _and_cache) on 7/15/19 to make test file run in correct order.
+##      Also allowed for the possibility of 49 photos.
+    def test_and_cache_default_num_photos(self):
+        self.assertTrue((len(get_flickr_data("sunset")["photos"]["photo"]) == 50) or (len(get_flickr_data("sunset")["photos"]["photo"]) == 49)  ,"Testing that the default num_photos response has 49 or 50 photos")
     def test_cache_in_function(self):
         testfile = open("waiver_cached_data.json","r")
         testfilestr = testfile.read()
@@ -42,12 +44,13 @@ class Problem6(unittest.TestCase):
         testfilestr = testfile.read()
         testfile.close()
         self.assertTrue("per_page-50" in testfilestr, "Testing (in part) that the params_unique_combination was used properly in the cache setup")
-    def test_cache_in_function3(self):
-        get_flickr_data("summer 2013",112) # specific params
-        testfile = open("waiver_cached_data.json","r")
-        testfilestr = testfile.read()
-        testfile.close()
-        self.assertTrue("https://api.flickr.com/services/rest/format-json_method-flickr.photos.search_nojsoncallback-1_per_page-112_tag_mode-all_tags-summer 2013" in testfilestr, "Testing that params and unique identifer setup are correct in get_flickr_data function")
+##  Removed 7/15/19, because there are multiple ways of pulling data from Flickr
+#    def test_cache_in_function3(self):
+#        get_flickr_data("summer 2013",112) # specific params
+#        testfile = open("waiver_cached_data.json","r")
+#        testfilestr = testfile.read()
+#        testfile.close()
+#        self.assertTrue("https://api.flickr.com/services/rest/format-json_method-flickr.photos.search_nojsoncallback-1_per_page-112_tag_mode-all_tags-summer 2013" in testfilestr, "Testing that params and unique identifer setup are correct in get_flickr_data function")
 
 class Problem7(unittest.TestCase):
     def test_flickr_mountains_result_keys(self):
@@ -55,11 +58,12 @@ class Problem7(unittest.TestCase):
     def test_fmr_res_type(self):
         self.assertEqual(type(flickr_mountains_result),type({}),"Testing that the type of flickr_mountains_result is a dictionary")
     def test_num_photos_flickr_mountains_res(self):
-        self.assertEqual(len(flickr_mountains_result["photos"]["photo"]),50,"Testing that there are 50 photos in flickr_mountains_result, using the default second param value in the function")
+        self.assertTrue((len(flickr_mountains_result["photos"]["photo"])==50) or (len(flickr_mountains_result["photos"]["photo"])==49),"Testing that there are 49 or 50 photos in flickr_mountains_result, using the default second param value in the function")
 
 class Problem8(unittest.TestCase):
+## Edited 7/18/19 to allow for the Flickr 49/50 error
     def test_photo_ids_len(self):
-        self.assertEqual(len(photo_ids),50,"Testing that there are 50 photo ids")
+        self.assertTrue((len(photo_ids) == 50) or (len(photo_ids) == 49),"Testing that there are 50 photo ids")
     def test_diff_photo_ids(self):
         self.assertTrue(photo_ids[0] != photo_ids[40], "Testing that the photo ids are different, not just 50 of the same one (check out your nested iteration, maybe)")
     def test_ids_in_cache(self):
