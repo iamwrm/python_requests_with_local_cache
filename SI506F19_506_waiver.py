@@ -138,6 +138,13 @@ CACHE_FNAME = "waiver_cached_data.json"
 ## Make sure you close the open file.
 ## If the above three steps don't work, create an empty dictionary called CACHE_DICTION.
 ## Translate the following English into code in order to set up a pattern so you can cache the data you get in this problem set.
+try:
+    read_file = open(CACHE_FNAME, "r")
+    CACHE_DICTION = json.load(read_file)
+    read_file.close()
+except:
+    read_file.close()
+    CACHE_DICTION = {}
 
 
 
