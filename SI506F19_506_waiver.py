@@ -53,7 +53,7 @@ print("\n***** PROBLEM 2 *****\n")
 ## https://www.flickr.com/services/api/misc.api_keys.html
 ## to get a key for the Flickr API, so that you can get data from Flickr and paste it below, inside the quotes.
 
-FLICKR_KEY = "" # paste your flickr API key here, between those quotation marks, such that the variable flickr_key will contain a string.
+FLICKR_KEY = "fa7ef945218d6e5d7458c1a94d354404" # paste your flickr API key here, between those quotation marks, such that the variable flickr_key will contain a string.
 
 
 ## DO NOT CHANGE ANYTHING ELSE ABOUT THE CODE HERE IN THIS PROBLEM 2.
@@ -82,8 +82,10 @@ print("\n***** PROBLEM 3 *****\n")
 
 ## HINT: Check out the '_content' keys' values deep inside the nested dictionary... (Don't use the "raw" key. Look at the data and consider why not!)
 
+sample_tags_list = []
 
-
+for tags in sample_photo_rep["photo"]["tags"]["tag"]:
+    sample_tags_list.append(tags["_content"])
 
 
 ## [PROBLEM 4] - Load a Flickr search response into a python dictionary, and then save a list of the corresponding photo IDs.
