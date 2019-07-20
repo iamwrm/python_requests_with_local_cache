@@ -99,12 +99,19 @@ print("\n***** PROBLEM 4 *****\n")
 ## PART 1:
 ## Write code that will open the sample_flickr_response.json file and load the data inside that file into a variable called search_result_diction.
 
+with open("sample_flickr_response.json", "r") as read_file:
+    search_result_diction = json.load(read_file)
 
 
 
 ## PART 2:
 ## The variable search_result_diction should now contain a very complex dictionary representing information about a bunch of photos that are tagged "trees". Each photo has an id.
 ## Write code to create a list of all of the photo ids from each photo included in search_result_diction, then save that list in a variable called sample_photo_ids.
+
+sample_photo_ids=[]
+
+for photo in search_result_diction["photos"]["photo"]:
+    sample_photo_ids.append(photo["id"])
 
 
 
