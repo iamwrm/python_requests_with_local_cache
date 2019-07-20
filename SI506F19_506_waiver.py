@@ -32,6 +32,9 @@ print("\n***** PROBLEM 1 *****\n") # (Printed statements like this one throughou
 
 ## Write code to open the file and load its contents as a Python dictionary into the variable sample_photo_rep. Then close the file (that'll keep you from running into easily-avoidable errors later on!).
 
+with open("sample_diction.json", "r") as read_file:
+    sample_photo_rep = json.load(read_file)
+
 ## (You may also find it useful, for later in the problem set, to open the file "sample_diction.json" in a text editor, or copy and paste its contents into http://www.jsoneditoronline.org/ to see what the nested data in this dictionary will be structured like.)
 
 
