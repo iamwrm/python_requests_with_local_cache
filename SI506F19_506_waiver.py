@@ -297,6 +297,34 @@ print("\n***** PROBLEM 9 *****\n")
 
 
 
+def get_photo_data(photo_id):
+    base_url = "https://api.flickr.com/services/rest/"
+
+    pd = {}
+    pd["method"] = "flickr.photos.getInfo"
+    pd["format"] = "json"
+    pd["api_key"] = FLICKR_KEY
+    pd["photo_id"] = photo_id
+
+    par_uni_com =  params_unique_combination( base_url, pd)
+
+    if par_uni_com in  CACHE_DICTION:
+        return CACHE_DICTION[par_uni_com]
+    else:
+        # use flickr api 
+        result = requests.get(base_url, params= pd)
+        result_text = result.text
+        result_text_fixed = result_text[14:-1]
+        flickr_data_obj = json.loads(result_text_fixed)
+
+        # put it in cache
+        CACHE_DICTION[par_uni_com] = flickr_data_obj
+        with open(CACHE_FNAME, 'w') as fp:
+            json.dump(CACHE_DICTION, fp)
+        
+
+
+        return flickr_data_obj
 
 
 
