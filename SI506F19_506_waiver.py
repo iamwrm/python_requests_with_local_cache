@@ -374,6 +374,30 @@ for id in sample_photo_ids:
 ## Instead, the title should be the string "NONE", the artist should be the string "NONE", and/or the tags value should be an empty list: [].
 ## You can use a try/except clause inside the __init__ method (constructor) definition to allow this to happen. Though any approach that returns the correct values is fine.
 
+class Photo:
+    def __init__(self, photo_dict):
+        self.artist = "NONE"
+        self.title = "NONE"
+        self.tags = []
+        try:
+            self.artist = photo_dict["photo"]["owner"]["username"]
+            self.title = photo_dict["photo"]["title"]["_content"]
+        except:
+            pass
+
+        try:
+            for tags in photo_dict["photo"]["tags"]["tag"]:
+                self.tags.append(tags["_content"])
+        except:
+            self.tags = []
+
+    def __str__(self):
+        return  self.title+", by "+self.artist+"\nTags: "+str(self.tags)+"\n"
+
+
+
+
+
 ## The class should also have a string method (__str__ method) that returns a string like, for example:
 
 """
