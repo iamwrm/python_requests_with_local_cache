@@ -270,6 +270,10 @@ print("\n***** PROBLEM 8 *****\n")
 ## Your photo_ids variable should have 50 different photo ids, since your Flickr API response in Problem 7 should have made a request for data from 50 photos.
 
 
+photo_ids=[]
+
+for photo in flickr_mountains_result["photos"]["photo"]:
+    photo_ids.append(photo["id"])
 
 
 
