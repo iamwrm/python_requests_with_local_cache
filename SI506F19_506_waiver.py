@@ -427,18 +427,27 @@ Tags: [u'mountains', u'river', u'yosemite']
 ## and for each dictionary in that list, create one instance of class Photo.
 ## Save the list of Photo instances in a variable called photo_insts.
 
+photo_insts = []
+for photo in photo_dictions_list:
+    photo_insts.append(Photo(photo))
 
 
 
 ## Sort the photo_insts list by the number of tags, in ascending order. So, for example, a photo that has only 3 tags would come earlier in the list than a photo that has 7 tags. Save the sorted list in a variable called sorted_photo_insts.
 
+def get_tag_length(Photo):
+    return len(Photo.tags)
 
+sorted_photo_insts = sorted(photo_insts,key = get_tag_length)
 
 
 
 ## Write code using the string method (which you write in __str__) of the Photo class to print out the string representation of the first 3 photos in the list sorted_photos_insts.
 
-
+i = 0
+while i<3 and i<len(sorted_photo_insts):
+    print(str(sorted_photo_insts[i]))
+    i+=1
 
 
 
