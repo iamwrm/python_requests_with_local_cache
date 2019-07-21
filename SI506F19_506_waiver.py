@@ -210,6 +210,38 @@ print("params diction example", params_unique_combination("https://api.flickr.co
 ## The examples in the online textbook will be very helpful here.
 
 
+def get_flickr_data(tag, photo_num=50):
+    base_url = "https://api.flickr.com/services/rest/"
+
+    pd = {}
+    pd["method"] = "flickr.photos.search"
+    pd["format"] = "json"
+    pd["api_key"] = FLICKR_KEY
+    pd["tags"] = tag
+    pd["tag_mode"] = "all"
+    pd["per_page"] = photo_num
+
+    par_uni_com =  params_unique_combination( base_url, pd)
+
+    if par_uni_com in  CACHE_DICTION:
+        return CACHE_DICTION[par_uni_com]
+    else:
+        # use flickr api 
+        result = requests.get(base_url, params= pd)
+        result_text = result.text
+        result_text_fixed = result_text[14:-1]
+        flickr_data_obj = json.loads(result_text_fixed)
+
+        # put it in cache
+        CACHE_DICTION[par_uni_com] = flickr_data_obj
+        with open(CACHE_FNAME, 'w') as fp:
+            json.dump(CACHE_DICTION, fp)
+        
+
+
+        return flickr_data_obj
+
+
 
 
 
