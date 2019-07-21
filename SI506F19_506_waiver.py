@@ -351,6 +351,11 @@ print("\n***** PROBLEM 10 *****\n")
 ## Iterate over your sample_photo_ids list from Problem 4, and invoke your get_photo_data function on each of the IDs. Append the result of each invocation to a list, so you are accumulating a list of dictionaries, each of which represents data about one photo. Save that list of dictionaries in a variable called photo_dictions_list.
 
 
+photo_dictions_list = []
+
+for id in sample_photo_ids:
+    photo_dictions_list.append(get_photo_data(id))
+    
 
 
 
