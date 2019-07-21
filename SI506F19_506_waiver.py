@@ -255,7 +255,7 @@ print("\n***** PROBLEM 7 *****\n")
 
 ## Make an invocation to your get_flickr_data function with the input "mountains" (use the default second parameter). Save the result in the variable flickr_mountains_result. 
 
-
+flickr_mountains_result = get_flickr_data("mountains")
 
 
 
