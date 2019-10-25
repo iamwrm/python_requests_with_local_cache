@@ -17,7 +17,7 @@ import requests
 
 ## When you run this program, you will see the print statements provided for you.
 
-## To run the tests for this file and see which are passing (they will show you Python unit test output), run the included test file in the same directory as all the rest of these files: f19_506waiver_tests.py
+## To run the tests for this file and see which are passing (they will show you Python unit test output), run the included test file in the same directory as all the rest of these files: tests.py
 ## If your program passes all of the tests, you will pass the waiver.
 
 #########

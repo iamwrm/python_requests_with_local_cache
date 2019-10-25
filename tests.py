@@ -1,5 +1,5 @@
 import unittest
-from SI506F19_506_waiver import *
+from handout import *
 
 class Problem1(unittest.TestCase):
     def test_sample_photo_rep(self):
